@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-jetbrains: 'JetBrains Mono', monospace;
+}
+
+@layer base {
+  body {
+    background-color: #0A0A0B;
+    color: #ffffff;
+  }
+
+  .font-mono {
+    font-family: var(--font-jetbrains);
+  }
+}
+
+@layer utilities {
+  .text-positive { color: #4ADE80; }
+  .text-negative { color: #F87171; }
+  .text-accent { color: #C8F135; }
+}
