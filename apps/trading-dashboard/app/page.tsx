@@ -1,6 +1,7 @@
 import MarketSection from '@/components/MarketSection'
 import TradesSection from '@/components/TradesSection'
 import SearchBar from '@/components/SearchBar'
+import MarketBreadth from '@/components/MarketBreadth'
 
 export default function Home() {
   return (
@@ -22,6 +23,14 @@ export default function Home() {
       </header>
 
       <div className="max-w-7xl mx-auto px-4 md:px-6 py-8 space-y-12">
+        {/* Breadth / Sentimiento */}
+        <section>
+          <div className="flex items-center gap-2 mb-6">
+            <h2 className="font-display font-bold text-xl text-white">Sentimiento de Mercado</h2>
+          </div>
+          <MarketBreadth />
+        </section>
+
         {/* Mercado */}
         <section>
           <div className="flex items-center gap-2 mb-6">

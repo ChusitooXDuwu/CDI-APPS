@@ -65,7 +65,7 @@ export default function TradingChart({
   const hlineRefs     = useRef<Map<string, ISeriesApi<'Line'>>>(new Map())
 
   const [activeTool, setActiveTool]     = useState<DrawTool>('none')
-  const [indicators, setIndicators]     = useState<Set<Indicator>>(new Set(['MA20', 'MA50']))
+  const [indicators, setIndicators]     = useState<Set<Indicator>>(new Set<Indicator>(['MA20', 'MA50']))
   const [drawnLines, setDrawnLines]     = useState<DrawnLine[]>([])
   const [crosshairData, setCrosshairData] = useState<{
     time?: string; open?: number; high?: number; low?: number; close?: number; volume?: number; change?: number
