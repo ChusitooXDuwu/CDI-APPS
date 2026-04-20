@@ -1,9 +1,16 @@
+import Link from 'next/link'
 import MarketSection from '@/components/MarketSection'
 import TradesSection from '@/components/TradesSection'
 import SearchBar from '@/components/SearchBar'
 import MarketBreadth from '@/components/MarketBreadth'
+import { createClient } from '@/lib/supabase/server'
+import { hasMiniaturasAccess } from '@/lib/access'
 
-export default function Home() {
+export default async function Home() {
+  const supabase = createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+  const canMiniaturas = hasMiniaturasAccess(user?.email)
+
   return (
     <main className="min-h-screen bg-bg">
       {/* Header */}
@@ -16,9 +23,31 @@ export default function Home() {
         </div>
         <div className="flex items-center gap-4">
           <SearchBar />
-          <span className="text-xs text-muted font-mono hidden md:block">
-            {new Date().toLocaleDateString('es-MX', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
-          </span>
+          {user ? (
+            <div className="flex items-center gap-4">
+              {canMiniaturas && (
+                <Link
+                  href="/miniaturas"
+                  className="text-xs font-mono text-accent hover:underline whitespace-nowrap"
+                >
+                  Miniaturas →
+                </Link>
+              )}
+              <Link
+                href="/portafolios"
+                className="text-xs font-mono text-accent hover:underline whitespace-nowrap"
+              >
+                Portafolios →
+              </Link>
+            </div>
+          ) : (
+            <Link
+              href="/login"
+              className="text-xs font-mono bg-accent text-bg font-bold px-3 py-1.5 rounded-lg hover:bg-accent/90 transition-colors whitespace-nowrap"
+            >
+              Iniciar sesión
+            </Link>
+          )}
         </div>
       </header>
 
